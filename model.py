@@ -1,4 +1,4 @@
-from conv_models import Conv2, Conv4, Conv6
+from shallow_conv_models import Conv2, Conv4, Conv6
 from vgg19 import VGG19
 from lenet import Lenet300100
 

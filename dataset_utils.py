@@ -7,7 +7,7 @@ def get_dataset(batch_size, dataset_type="mnist"):
     if dataset_type == "mnist":
         train_dl = data.DataLoader(
             data.Subset(
-                datasets.MNIST(root="./data/", train=True, download=False, transform=transforms.ToTensor()),
+                datasets.MNIST(root="./data/", train=True, download=True, transform=transforms.ToTensor()),
                 load("./data/mnist_train_indices.pt")
             ),
             batch_size=batch_size,
@@ -23,7 +23,7 @@ def get_dataset(batch_size, dataset_type="mnist"):
         )
 
         test_dl = data.DataLoader(
-            datasets.MNIST(root="./data/", train=False, transform=transforms.ToTensor(), download=False),
+            datasets.MNIST(root="./data/", train=False, transform=transforms.ToTensor(), download=True),
             batch_size=batch_size,
             shuffle=False
         )
@@ -44,7 +44,7 @@ def get_dataset(batch_size, dataset_type="mnist"):
         )
         train_dl = data.DataLoader(
             data.Subset(
-                datasets.CIFAR10(root="./data/", train=True, download=False, transform=train_transform),
+                datasets.CIFAR10(root="./data/", train=True, download=True, transform=train_transform),
                 load("./data/cifar10_train_indices.pt")
             ),
             batch_size=batch_size,
@@ -53,7 +53,7 @@ def get_dataset(batch_size, dataset_type="mnist"):
 
         val_dl = data.DataLoader(
             data.Subset(
-                datasets.CIFAR10(root="./data/", train=True, download=False, transform=test_transform),
+                datasets.CIFAR10(root="./data/", train=True, download=True, transform=test_transform),
                 load("./data/cifar10_val_indices.pt")
             ),
 
@@ -62,7 +62,7 @@ def get_dataset(batch_size, dataset_type="mnist"):
         )
 
         test_dl = data.DataLoader(
-            datasets.CIFAR10(root="./data/", train=False, download=False, transform=test_transform),
+            datasets.CIFAR10(root="./data/", train=False, download=True, transform=test_transform),
             batch_size=batch_size,
             shuffle=False
         )
