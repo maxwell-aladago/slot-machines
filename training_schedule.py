@@ -20,7 +20,7 @@ def schedule(configuration):
         raise ValueError(f"unknown model type {args.model_type}")
 
     if args.method == "greedy":
-        if args.k >= 8:
+        if args.k > 8:
             lr = 0.01
         else:
             lr = 0.1
@@ -52,12 +52,12 @@ def schedule(configuration):
 def get_optimizer(model, args):
     optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9)
     scheduler = None
-    if args.method == "greedy":
-        if args.model_type in ["conv6", "vgg19"]:
-            optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=1e-4)
-        elif args.model_type == 'vgg19':
-            scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[80], gamma=0.1)
-    elif args.model_type == "learned":
+
+    if args.model_type == 'vgg19':
+        optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=1e-4)
+        scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[80], gamma=0.1)
+
+    if args.model_type == "learned":
         optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=0.9, weight_decay=1e-4)
         if args.model_type in ["conv2", "conv4"]:
             scheduler = optim.lr_scheduler.MultiStepLR(optimizer, milestones=[60], gamma=0.1)

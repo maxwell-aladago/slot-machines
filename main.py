@@ -68,6 +68,5 @@ if __name__ == '__main__':
     configuration.add_argument("--seed", default=0, type=int)
     configuration.add_argument("--use_checkpoint", default=False, type=bool)
 
-    # args_ = configuration.parse_args()
     train_schedule = schedule(configuration)
     main(train_schedule.parse_args())
